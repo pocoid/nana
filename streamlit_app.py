@@ -11,12 +11,12 @@ data = pd.read_csv('air_quality.csv')
 st.title('Analisis Kualitas Udara')
 
 # Menambahkan pilihan lokasi dan parameter
-lokasi = st.selectbox('Pilih Lokasi:', data['location'].unique())
-parameter = st.selectbox('Pilih Parameter:', data.columns[2:])
+lokasi = st.selectbox('Pilih Lokasi:', data['station'].unique())
+parameter = st.selectbox('Pilih Parameter:', data.columns[5:])  # Sesuaikan dengan kolom yang sesuai dengan parameter
 
 # Menampilkan data terpilih
 st.subheader(f'Data Kualitas Udara untuk {lokasi}')
-filtered_data = data[data['location'] == lokasi]
+filtered_data = data[data['station'] == lokasi]
 st.write(filtered_data)
 
 # Visualisasi data
@@ -30,7 +30,7 @@ st.pyplot()
 
 # Scatter Plot untuk korelasi antara polusi udara dan suhu udara
 plt.figure(figsize=(10, 6))
-sns.scatterplot(x='temperature', y=parameter, data=filtered_data)
+sns.scatterplot(x='TEMP', y=parameter, data=filtered_data)  # Sesuaikan dengan kolom suhu
 plt.title(f'Korelasi antara {parameter} dan Suhu Udara di {lokasi}')
 st.pyplot()
 
